@@ -1,0 +1,8 @@
+{
+  "label": "Terefes",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Migración de firmware del TEREFES desde Atmel Studio (actulamente Microchip Studio) a PlatformIO."
+  }
+}

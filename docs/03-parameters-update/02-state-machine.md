@@ -107,7 +107,7 @@ Procure usar `PARAM_STATUS` y `PARAM_ENABLED` en conjunto para identificar si to
 Aún no se han definido las banderas de este parámetro.
 :::
 
-`PARAM_ERROR` `Y` indica cualquier error del sistema, para verificar el tipo de error presente se puede revisar la siguiente tabla:
+`PARAM_ERROR` (`Y`) indica cualquier error del sistema, para verificar el tipo de error presente se puede revisar la siguiente tabla:
 
 | BIT | PARAM_ERROR                  | COMMENT                                                    |
 | --- | ---------------------------- | ---------------------------------------------------------- |
@@ -123,3 +123,50 @@ Aún no se han definido las banderas de este parámetro.
 :::tip
 Procure mantener esta información siempre a mano, nunca se sabe cuando pueda ser bastante útil.
 :::
+
+### PARAM_MODO_ESTIMULACION
+
+:::info[Información]
+`PARAM_MODO_ESTIMULACION` es un valor de escritura/lectura [R/W].
+:::
+
+`PARAM_MODO_ESTIMULACION` (`BG`) es el encargado de gestionar el modo de funcionamiento de cada canal, las opciones configurables son `0` para modo simétrico y `1` para modo asimétrico.
+
+:::note[Nota]
+Actualmente sólo es posible realizar dicha configuración para todos los canales en conjunto, es decir, no es posible configurarlos de forma individual.
+:::
+
+| Estimluación | Posiciones                                                             | Valor binario        | Valor hexadecimal | Valor decimal |
+| ------------ | ---------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
+| Simétrica    | Bit0=0 (canal 4), Bit2=0 (canal 3), Bit1=0 (canal 2), Bit0=0 (canal 1) | `0b0000000000000000` | `0x0000`          | `0`           |
+| Asimétrica   | Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
+
+### PARAM_FIRMWARE_VERSION
+
+:::info[Información]
+`PARAM_FIRMWARE_VERSION` es un valor de sólo lectura [R].
+:::
+
+:::note[Nota]
+El versionamiento del _firwmare_ sigue el estilo de Versionado Semántico 2.0.0[^1], el cual corresponde a MAJOR.MINOR.PATCH.
+
+Para este caso, cada una de estas tres opciones corresponden a un valor decimal almacenado en 4 bits, dando valores posibles desde el 0 hasta el 15 en cada uno de ellos.
+:::
+
+:::info[Información]
+La versión actual del sistema corresponde a la versión `v0.0.1`.
+:::
+
+`PARAM_FIRMWARE_VERSION` (`BH`) indica la versión actual del firware del sistema.
+
+| Bits | PARAM_FIRMWARE_VERSION | Comentario                                                                      |
+| ---- | ---------------------- | ------------------------------------------------------------------------------- |
+| 0-3  | PATCH                  | Versión PATCH indica que se han resuelto _bugs_ en el código.                   |
+| 4-7  | MINOR                  | Versión MINOR agrega nuevas funcionalidades manteniendo la retrocompatibilidad  |
+| 8-11 | MAJOR                  | Versión MAJOR indica cambios que lo hacen incompatible con versiones anteriores |
+
+| Versión del _firmware_ | Posiciones                                                        | Valor binario        | Valor hexadecimal | Valor decimal |
+| ---------------------- | ----------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
+| 0.0.1                  | Bit[8-11]=0000 (MAJOR), Bit[4-7]=0000 (MINOR), Bit[0-3]=0001 (PATCH) | `0b0000000000000001` | `0x0001`          | `1`           |
+
+[^1]: Más información sobre Versionado Semántico 2.0.0 (en inglés): [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html).

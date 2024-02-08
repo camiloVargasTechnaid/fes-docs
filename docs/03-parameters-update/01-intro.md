@@ -25,7 +25,7 @@ Todas las variables que se presentarán a continuación son del tipo enteros pos
 | 14  | O         | PARAM_POS_TIME_4        | 2                 | 2 - 1000     | μs       | Periodo positivo (canal 4)            |
 | 15  | P         | PARAM_NEG_TIME_4        | 2                 | 2 - 1000     | μs       | Periodo negativo (canal 4)            |
 | 16  | Q         | PARAM_ORDER_CHANNELS    | 228 (0x00E4)      | N/A          | N/A      | Orden de activación de los canales.   |
-| 17  | R         | PARAM_REPETITIONS       | 1                 | 0-3          | N/A      | Número de repeticiones de los canales |
+| 17  | R         | PARAM_REPETITIONS       | 0                 | 0-3          | N/A      | Número de repeticiones de los canales |
 | 18  | S         | PARAM_INV_PULSE         | 0 (0x0000)        | 0-1          | N/A      | Inversión de los canales              |
 | 19  | T         | PARAM_UMBRRAL_MOTOR_1   | 0                 | 0 - 80       | mA       | Umbral motor (canal 1)                |
 | 20  | U         | PARAM_UMBRRAL_MOTOR_2   | 0                 | 0 - 80       | mA       | Umbral motor (canal 2)                |
@@ -54,11 +54,11 @@ Respecto a los parámetros de amplitudes, periodos y frecuencias de los canales,
 
 | ID  | Parámetro | Nombre                  | Valor por defecto | Rango típico | Unidades | Descripción                                              |
 | --- | --------- | ----------------------- | ----------------- | ------------ | -------- | -------------------------------------------------------- |
-| 49  | AX        | PARAM_ERROR             | 0                 | N/A          | N/A      | Errores del sistema                                      |
-| 50  | AY        | PARAM_STATUS            | N/A               | N/A          | N/A      | Estado de las funciones del sistema                      |
-| 51  | AZ        | PARAM_ENABLED           | 1 (0x0001)        | N/A          | N/A      | Funciones habilitadas por el usuario                     |
+| 49  | AX        | PARAM_ERROR             | 0 (0x0000)                 | N/A          | N/A      | Errores del sistema                                      |
+| 50  | AY        | PARAM_STATUS            | 0 (0x0000)               | N/A          | N/A      | Estado de las funciones del sistema                      |
+| 51  | AZ        | PARAM_ENABLED           | 0 (0x0000)        | N/A          | N/A      | Funciones habilitadas por el usuario                     |
 | 58  | BG        | PARAM_MODO_ESTIMULACION | 0                 | 0 - 1        | N/A      | Modo de estimulación del sistema: Simétrico o asimétrico |
-| 59  | BH        | PARAM_FIRMWARE_VERSION  | N/A               | N/A          | N/A      | Versión del firmware del sistema.[^1]                    |
+| 59  | BH        | PARAM_FIRMWARE_VERSION  | 0.0.1[^1] (0x0001)               | N/A          | N/A      | Versión del firmware del sistema.[^1]                    |
 
 De todo este conjunto de parámetros, hay algunos como `PARAM_ORDER_CHANNELS`, `PARAM_REPETITIONS`, `PARAM_INV_PULSE` y los inlcuidos en [Otros parámetros](#otros-parámetros) que son representaciones binarias del dato a ingresar; cada uno de estos se describirá a continuación:
 
@@ -76,7 +76,7 @@ En caso de que dos o más canales se activen en la misma posición, solamente se
 
 Un ejemplo de configuración es el valor por defecto del parámetro, el cual organiza cada canal en el mismo orden de su valor: canal 1: primero; canal 2: segundo; canal 3: tercero y, canal 4: cuarto. Otra opción es la forma invertida, siendo el canal 1 el último en activarse y el canal 4 el primero de todos. De este modo, la variable `PARAM_ORDER_CHANNELS` tendría los siguientes posibles valores:
 
-- Orden de aparición de bits: CH4=44, CH3=33, CH2=22, CH1=11; todos los valores deben ser `0` ó `1` según su posición.
+- Orden de aparición de bits: CH4=Bit[6-7]:44, CH3=Bit[4-5]:33, CH2=Bit[2-3]:22, CH1=Bit[0-1]:11; todos los valores deben ser `0` ó `1` según su posición.
 - `PARAM_ORDER_CHANNELS` = 0b0000000044332211; todos los valores deben ser `0` ó `1` según su posición.
 
 :::tip
@@ -85,10 +85,10 @@ El valor a enviar al dispositivo corresponde a su valor en decimal.
 
 :::
 
-| Orden       | Posiciones                             | Valor binario        | Valor hexadecimal | Valor decimal |
-| ----------- | -------------------------------------- | -------------------- | ----------------- | ------------- |
-| Ascendente  | CH4:4=11, CH3:3=10, CH2:2=01, CH1:1=00 | `0b0000000011100100` | `0x00E4`          | `228`         |
-| Descendente | CH1:4=11, CH2:3=10, CH3:2=01, CH4:1=00 | `0b0000000000011011` | `0x0033`          | `27`          |
+| Orden       | Posiciones                       | Valor binario        | Valor hexadecimal | Valor decimal |
+| ----------- | -------------------------------- | -------------------- | ----------------- | ------------- |
+| Ascendente  | CH4=11, CH3=10, CH2=01, CH1=00   | `0b0000000011100100` | `0x00E4`          | `228`         |
+| Descendente | CH4=00, CH2:3=01, CH2=10, CH1=11 | `0b0000000000011011` | `0x0033`          | `27`          |
 
 :::danger[Peligro]
 
@@ -108,10 +108,10 @@ Para conocer un poco más respecto a la configuración de los bits del parámetr
 
 El rango de opciones se encuentra entre 0 repeticiones y 3 repeticiones:
 
-| Repeticiones | Posiciones                             | Valor binario        | Valor hexadecimal | Valor decimal |
-| ------------ | -------------------------------------- | -------------------- | ----------------- | ------------- |
-| Una          | CH4:4=01, CH3:3=01, CH2:2=01, CH1:1=01 | `0b0000000001010101` | `0x0055`          | `85`          |
-| Variada      | CH1:4=11, CH2:3=10, CH3:2=11, CH4:1=01 | `0b0000000011101101` | `0x00ED`          | `237`         |
+| Repeticiones | Posiciones                     | Valor binario        | Valor hexadecimal | Valor decimal |
+| ------------ | ------------------------------ | -------------------- | ----------------- | ------------- |
+| Una          | CH4=01, CH3=01, CH2=01, CH1=01 | `0b0000000001010101` | `0x0055`          | `85`          |
+| Variada      | CH4=11, CH3=10, CH2=11, CH1=01 | `0b0000000011101101` | `0x00ED`          | `237`         |
 
 :::info[Información]
 
@@ -143,7 +143,7 @@ En caso de que el par de bits correspondan a un valor diferente a `0` ó `1` (co
 
 :::tip
 
-- `0`: Indica que el canal no está invertido.
+- `0`: Indica que el canal no está invertido (valor por defecto).
 - `1`: Indica que el canal está invertido.
 
 :::
@@ -154,10 +154,10 @@ Para conocer un poco más respecto a la configuración de los bits del parámetr
 
 :::
 
-| Inversión             | Posiciones                             | Valor binario        | Valor hexadecimal | Valor decimal |
-| --------------------- | -------------------------------------- | -------------------- | ----------------- | ------------- |
-| Inversión intercalada | CH4:4=01, CH3:3=00, CH2:2=01, CH1:1=00 | `0b0000000001000100` | `0x0044`          | `68`          |
-| Variado               | CH1:4=01, CH2:3=01, CH3:2=01, CH4:1=00 | `0b0000000001010100` | `0x0054`          | `84`          |
+| Inversión             | Posiciones                     | Valor binario        | Valor hexadecimal | Valor decimal |
+| --------------------- | ------------------------------ | -------------------- | ----------------- | ------------- |
+| Inversión intercalada | CH4=01, CH3=00, CH2=01, CH1=00 | `0b0000000001000100` | `0x0044`          | `68`          |
+| Variado               | CH4=01, CH3=01, CH2=01, CH1=00 | `0b0000000001010100` | `0x0054`          | `84`          |
 
 :::danger[Peligro]
 

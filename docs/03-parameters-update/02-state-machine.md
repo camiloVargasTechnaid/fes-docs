@@ -4,11 +4,11 @@ Recordando los parámetros que aún faltan por definir:
 
 | ID  | Parámetro | Nombre                  | Valor por defecto | Rango típico | Unidades | Descripción                                              |
 | --- | --------- | ----------------------- | ----------------- | ------------ | -------- | -------------------------------------------------------- |
-| 49  | AX        | PARAM_ERROR             | 0                 | N/A          | N/A      | Errores del sistema                                      |
-| 50  | AY        | PARAM_STATUS            | N/A               | N/A          | N/A      | Estado de las funciones del sistema                      |
-| 51  | AZ        | PARAM_ENABLED           | 1 (0x0001)        | N/A          | N/A      | Funciones habilitadas por el usuario                     |
+| 49  | AX        | PARAM_ERROR             | 0 (0x0000)                 | N/A          | N/A      | Errores del sistema                                      |
+| 50  | AY        | PARAM_STATUS            | 0 (0x0000)               | N/A          | N/A      | Estado de las funciones del sistema                      |
+| 51  | AZ        | PARAM_ENABLED           | 0 (0x0000)        | N/A          | N/A      | Funciones habilitadas por el usuario                     |
 | 58  | BG        | PARAM_MODO_ESTIMULACION | 0                 | 0 - 1        | N/A      | Modo de estimulación del sistema: Simétrico o asimétrico |
-| 59  | BH        | PARAM_FIRMWARE_VERSION  | N/A               | N/A          | N/A      | Versión del firmware del sistema.                        |
+| 59  | BH        | PARAM_FIRMWARE_VERSION  | 0.0.1[^1] (0x0001)               | N/A          | N/A      | Versión del firmware del sistema.[^1]                    |
 
 De esta tabla hay 3 variables importantes que manejan la máquina de estados del sistema:
 
@@ -148,13 +148,13 @@ Actualmente sólo es posible realizar dicha configuración para todos los canale
 :::
 
 :::note[Nota]
-El versionamiento del _firwmare_ sigue el estilo de Versionado Semántico 2.0.0[^1], el cual corresponde a MAJOR.MINOR.PATCH.
+El versionamiento del _firwmare_ sigue el estilo de Versionado Semántico 2.0.0[^2], el cual corresponde a MAJOR.MINOR.PATCH.
 
 Para este caso, cada una de estas tres opciones corresponden a un valor decimal almacenado en 4 bits, dando valores posibles desde el 0 hasta el 15 en cada uno de ellos.
 :::
 
 :::info[Información]
-La versión actual del sistema corresponde a la versión `v0.0.1`.
+La versión actual del sistema corresponde a la versión `v0.0.1`[^1].
 :::
 
 `PARAM_FIRMWARE_VERSION` (`BH`) indica la versión actual del firware del sistema.
@@ -169,4 +169,5 @@ La versión actual del sistema corresponde a la versión `v0.0.1`.
 | ---------------------- | ----------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
 | 0.0.1                  | Bit[8-11]=0000 (MAJOR), Bit[4-7]=0000 (MINOR), Bit[0-3]=0001 (PATCH) | `0b0000000000000001` | `0x0001`          | `1`           |
 
-[^1]: Más información sobre Versionado Semántico 2.0.0 (en inglés): [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html).
+[^1]: La versión actual del sistema corresponde a: v0.0.1.
+[^2]: Más información sobre Versionado Semántico 2.0.0 (en inglés): [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html).

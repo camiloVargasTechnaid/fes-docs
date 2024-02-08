@@ -2,13 +2,13 @@
 
 Recordando los parámetros que aún faltan por definir:
 
-| ID  | Parámetro | Nombre                  | Valor por defecto | Rango típico | Unidades | Descripción                                              |
-| --- | --------- | ----------------------- | ----------------- | ------------ | -------- | -------------------------------------------------------- |
-| 49  | AX        | PARAM_ERROR             | 0 (0x0000)                 | N/A          | N/A      | Errores del sistema                                      |
-| 50  | AY        | PARAM_STATUS            | 0 (0x0000)               | N/A          | N/A      | Estado de las funciones del sistema                      |
-| 51  | AZ        | PARAM_ENABLED           | 0 (0x0000)        | N/A          | N/A      | Funciones habilitadas por el usuario                     |
-| 58  | BG        | PARAM_MODO_ESTIMULACION | 0                 | 0 - 1        | N/A      | Modo de estimulación del sistema: Simétrico o asimétrico |
-| 59  | BH        | PARAM_FIRMWARE_VERSION  | 0.0.1[^1] (0x0001)               | N/A          | N/A      | Versión del firmware del sistema.[^1]                    |
+| ID  | Parámetro | Nombre                  | Valor por defecto  | Rango típico | Unidades | Descripción                                              |
+| --- | --------- | ----------------------- | ------------------ | ------------ | -------- | -------------------------------------------------------- |
+| 49  | AX        | PARAM_ERROR             | 0 (0x0000)         | N/A          | N/A      | Errores del sistema                                      |
+| 50  | AY        | PARAM_STATUS            | 0 (0x0000)         | N/A          | N/A      | Estado de las funciones del sistema                      |
+| 51  | AZ        | PARAM_ENABLED           | 0 (0x0000)         | N/A          | N/A      | Funciones habilitadas por el usuario                     |
+| 58  | BG        | PARAM_MODO_ESTIMULACION | 0                  | 0 - 1        | N/A      | Modo de estimulación del sistema: Simétrico o asimétrico |
+| 59  | BH        | PARAM_FIRMWARE_VERSION  | 0.0.1[^1] (0x0001) | N/A          | N/A      | Versión del firmware del sistema.[^1]                    |
 
 De esta tabla hay 3 variables importantes que manejan la máquina de estados del sistema:
 
@@ -103,22 +103,31 @@ Procure usar `PARAM_STATUS` y `PARAM_ENABLED` en conjunto para identificar si to
 `PARAM_ENABLED` es un valor de sólo lectura [R].
 :::
 
-:::danger[Peligro]
-Aún no se han definido las banderas de este parámetro.
-:::
+:::tip
+
+- `0`: indica que no existe error en la bandera correspondiente.
+- `1`: indica que existe error en la bandera correspondiente.
+  :::
 
 `PARAM_ERROR` (`Y`) indica cualquier error del sistema, para verificar el tipo de error presente se puede revisar la siguiente tabla:
 
-| BIT | PARAM_ERROR                  | COMMENT                                                    |
-| --- | ---------------------------- | ---------------------------------------------------------- |
-| 0   | FLAG_TEMP_PCB_PROBE_ERROR    | Pcb probe failed (one wire not answering)                  |
-| 1   | FLAG_TEMP_EXT1_PROBE_ERROR   | Liquid probe in the top failed (one wire not answering)    |
-| 2   | FLAG_TEMP_EXT2_PROBE_ERROR   | Liquid probe in the bottom failed (one wire not answering) |
-| 3   | FLAG_TEMP_PCB_RANGE_ERROR    | Temperature of pcb is out of range range                   |
-| 4   | FLAG_TEMP_EXT1_RANGE_ERROR   | Temperature of liquid in the top is out of range           |
-| 5   | FLAG_TEMP_EXT2_RANGE_ERROR   | Temperature of liquid in the bottom is out of range        |
-| 6   | FLAG_TEMP_TARGET_RANGE_ERROR | Target temperature is out of range                         |
-| 7   | FLAG_WEIGHT_RANGE_ERROR      | Weight is out of range                                     |
+| BIT | PARAM_ERROR             | COMMENT                                   |
+| --- | ----------------------- | ----------------------------------------- |
+| 0   | FLAG_CHANNEL_1_ERROR    | Falla en el Canal 1                       |
+| 1   | FLAG_CHANNEL_2_ERROR    | Falla en el Canal 2                       |
+| 2   | FLAG_CHANNEL_3_ERROR    | Falla en el Canal 3                       |
+| 3   | FLAG_CHANNEL_4_ERROR    | Falla en el Canal 4                       |
+| 4   | FLAG_POWER_SOURCE_ERROR | Falla en la fuente de estimulación        |
+| 5   | FLAG_LOW_LOAD_ERROR     | La impedancia en el electrodo es muy baja |
+| 6   | FLAG_HIGH_LOAD_ERROR    | La impedancia en el electrodo es muy alta |
+
+Al ser este parámetro un indicador de error, una vez resuleto el problema, la variable se actualizará e indicará si el problema ha sido efectivamente resuelto.
+
+| Error                | Posiciones                                                             | Valor binario        | Valor hexadecimal | Valor decimal |
+| -------------------- | ---------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
+| Canal 1 y carga baja | Bit6=0, Bit5=1, Bit4=0, Bit3=0, Bit2=0, Bit1=0, Bit0=0                 | `0b0000000000100001` | `0x0021`          | `33`          |
+| Canal 4 | Bit6=0, Bit5=0, Bit4=0, Bit3=1, Bit2=0, Bit1=0, Bit0=0                 | `0b0000000000001000` | `0x0008`          | `8`          |
+| Sin errores | Bit6=0, Bit5=0, Bit4=0, Bit3=0, Bit2=0, Bit1=0, Bit0=0                 | `0b0000000000000000` | `0x0000`          | `0`          |
 
 :::tip
 Procure mantener esta información siempre a mano, nunca se sabe cuando pueda ser bastante útil.
@@ -165,8 +174,8 @@ La versión actual del sistema corresponde a la versión `v0.0.1`[^1].
 | 4-7  | MINOR                  | Versión MINOR agrega nuevas funcionalidades manteniendo la retrocompatibilidad  |
 | 8-11 | MAJOR                  | Versión MAJOR indica cambios que lo hacen incompatible con versiones anteriores |
 
-| Versión del _firmware_ | Posiciones                                                        | Valor binario        | Valor hexadecimal | Valor decimal |
-| ---------------------- | ----------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
+| Versión del _firmware_ | Posiciones                                                           | Valor binario        | Valor hexadecimal | Valor decimal |
+| ---------------------- | -------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
 | 0.0.1                  | Bit[8-11]=0000 (MAJOR), Bit[4-7]=0000 (MINOR), Bit[0-3]=0001 (PATCH) | `0b0000000000000001` | `0x0001`          | `1`           |
 
 [^1]: La versión actual del sistema corresponde a: v0.0.1.

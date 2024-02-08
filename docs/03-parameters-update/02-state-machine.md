@@ -17,7 +17,7 @@ De esta tabla hay 3 variables importantes que manejan la máquina de estados del
 - `PARAM_ERROR`: Muestra si existe algún error en el sistema.
 
 :::info[Información]
-El parámetro `PARAM_ENABLED` `AZ` permite activar o desactivar algunas funciones del sistema, por ejemplo, deshabilitar el canal 1 mientras se mantienen activos los demás canales..
+El parámetro `PARAM_ENABLED` (`AZ`) permite activar o desactivar algunas funciones del sistema, por ejemplo, deshabilitar el canal 1 mientras se mantienen activos los demás canales.
 :::
 
 ### PARAM_ENABLED
@@ -26,7 +26,7 @@ El parámetro `PARAM_ENABLED` `AZ` permite activar o desactivar algunas funcione
 `PARAM_ENABLED` es un valor de lectura y escritura [R/W].
 :::
 
-`PARAM_ENABLED` `AZ` permite habilitar o deshabilitar algunas funcionalidades del sistema, estas características pueden ser controladas a través de banderas que se asocian a este parámetro. Actualmente, se pueden activar individualmente cada canal y, a su vez, activar la estimulación.
+`PARAM_ENABLED` (`AZ`) permite habilitar o deshabilitar algunas funcionalidades del sistema, estas características pueden ser controladas a través de banderas que se asocian a este parámetro. Actualmente, se pueden activar individualmente cada canal y, a su vez, activar la estimulación.
 
 | Bit | PARAM_ENABLED            | Comentario                      |
 | --- | ------------------------ | ------------------------------- |
@@ -41,7 +41,7 @@ El parámetro `PARAM_ENABLED` `AZ` permite activar o desactivar algunas funcione
 `FLAG_RAMP_CONTROL` aún no se encuentra implementada.
 :::
 
-En este caso, cada bandera corresponde a un único bit, el cual según su valor, indica si se habilita ó desahibilita algún canal, mientras que `FLAG_STIMULATION_CONTROL` indica además si se desea activar la estimulación.
+En este caso, cada bandera corresponde a un único bit, el cual según su valor, indica si se habilita o desahibilita algún canal, mientras que `FLAG_STIMULATION_CONTROL` indica además si se desea activar la estimulación en los canales que estén habilitados.
 
 :::note[Nota]
 
@@ -57,10 +57,10 @@ Mientras que la bandera `FLAG_STIMULATION_CONTROL` se encuentre desactivada, nin
 | Habilitación                        | Posiciones                                                                                    | Valor binario        | Valor hexadecimal | Valor decimal |
 | ----------------------------------- | --------------------------------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
 | Canal 1 y 3, estimulación           | Bit4=1 (estimulación), Bit3=0 (canal 4), Bit2=1 (canal 3), Bit1=0 (canal 2), Bit0=1 (canal 1) | `0b0000000000010101` | `0x0015`          | `21`          |
-| Todos los canales, sin estimulación | Bit4=0 (estimulación), Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x001F`          | `31`          |
+| Todos los canales, sin estimulación | Bit4=0 (estimulación), Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
 
 :::tip
-Si se desea activar todo, el valor de `PARAM_ENABLED` debe ser `31`.
+Si se desean activar todos los canales, el valor de `PARAM_ENABLED` debe ser `31`.
 :::
 
 :::danger[Peligro]
@@ -75,7 +75,7 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 `PARAM_ENABLED` es un valor de sólo lectura [R].
 :::
 
-`PARAM_STATUS` `Z` indica los canales actualmente activos. Se compone, al igual que [PARAM_ENABLED](#param_enabled), de diferentes bits/banderas, los cuales son activadas directamente por el sistema, haciendo que este parámetro sea el que indique si efectivamente el canal está en funcionamiento.
+`PARAM_STATUS` (`Z`) indica los canales actualmente activos. Se compone, al igual que [PARAM_ENABLED](#param_enabled), de diferentes bits/banderas, los cuales son activadas directamente por el sistema, haciendo que este parámetro sea el que indique si efectivamente el canal está en funcionamiento.
 
 :::tip
 Procure usar `PARAM_STATUS` y `PARAM_ENABLED` en conjunto para identificar si todo está configurado correctamente, ya que en muchas ocasiones puede pasar que se habliten los canales pero estos no posean el estado de activados, lo cual puede ser un indicativo de que algo puede estar sin configurar o existe algún error en el sistema.
@@ -121,5 +121,5 @@ Aún no se han definido las banderas de este parámetro.
 | 7   | FLAG_WEIGHT_RANGE_ERROR      | Weight is out of range                                     |
 
 :::tip
-Always have this information at hand, you never know when it can be very helpful.
+Procure mantener esta información siempre a mano, nunca se sabe cuando pueda ser bastante útil.
 :::

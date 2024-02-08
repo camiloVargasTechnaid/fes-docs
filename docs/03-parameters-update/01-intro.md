@@ -115,7 +115,7 @@ El rango de opciones se encuentra entre 0 repeticiones y 3 repeticiones:
 
 :::info[Información]
 
-En caso de que el número de repeticiones seleccionado sea mayor a `3` o no sea posible hacer la repetición debido a que el periodo de grupo es muy pequeño, su valor será ajustado al número de repetición más cercano posible.
+En caso de que no sea posible hacer el número de repeticiones indicado debido a que el periodo de grupo es muy pequeño, su valor será ajustado al número de repetición más cercano posible.
 
 :::
 
@@ -137,7 +137,7 @@ A diferencia de `PARAM_ORDER_CHANNELS` y `PARAM_REPETITIONS` que tienen 3 opcion
 
 :::warning[Advertencia]
 
-En caso de que el par de bits correspondan a un valor a `0` ó `1`, se tomará el **valor por defecto** del parámetro para cada uno de los canales que tenga dicho error.
+En caso de que el par de bits correspondan a un valor diferente a `0` ó `1` (como `10` y `11`), se tomará el **valor por defecto** del parámetro para cada uno de los canales que contenga dicho error.
 
 :::
 

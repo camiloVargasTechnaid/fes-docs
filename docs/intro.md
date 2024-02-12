@@ -21,4 +21,4 @@ These parameters apply to all the channels. We are considering to support 2 chan
 
 A packet is a group of pulse trains that appear one period of $1/FG$. For example, if you want to repeat pulse 1 at least 2 times inside the period, you must set NP from 1 to 2; in this case, when pulse 2 has finished, and the period is not complete, the pulse 1 will star again.
 
-![Pulse Trains example](pulse-trains.png)
+![Pulse Trains example](img/pulse-train.png)

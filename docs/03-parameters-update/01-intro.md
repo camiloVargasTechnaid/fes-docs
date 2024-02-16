@@ -10,20 +10,20 @@ Todas las variables que se presentarán a continuación son del tipo enteros pos
 | --- | --------- | ----------------------- | ----------------- | ------------ | -------- | ------------------------------------- |
 | 0   | A         | PARAM_POS_AMP_1         | 0                 | 0 - 80       | mA       | Amplitud positiva (canal 1)           |
 | 1   | B         | PARAM_NEG_AMP_1         | 0                 | 0 - 80       | mA       | Amplitud negativa (canal 1)           |
-| 2   | C         | PARAM_POS_TIME_1        | 2                 | 2 - 1000     | μs       | Periodo positivo (canal 1)            |
-| 3   | D         | PARAM_NEG_TIME_1        | 2                 | 2 - 1000     | μs       | Periodo negativo (canal 1)            |
+| 2   | C         | PARAM_POS_TIME_1        | 2                 | 100 - 1000     | μs       | Periodo positivo (canal 1)            |
+| 3   | D         | PARAM_NEG_TIME_1        | 2                 | 100 - 1000     | μs       | Periodo negativo (canal 1)            |
 | 4   | E         | PARAM_POS_AMP_2         | 0                 | 0 - 80       | mA       | Amplitud positiva (canal 2)           |
 | 5   | F         | PARAM_NEG_AMP_2         | 0                 | 0 - 80       | mA       | Amplitud negativa (canal 2)           |
-| 6   | G         | PARAM_POS_TIME_2        | 2                 | 2 - 1000     | μs       | Periodo positivo (canal 2)            |
-| 7   | H         | PARAM_NEG_TIME_2        | 2                 | 2 - 1000     | μs       | Periodo negativo (canal 2)            |
+| 6   | G         | PARAM_POS_TIME_2        | 2                 | 100 - 1000     | μs       | Periodo positivo (canal 2)            |
+| 7   | H         | PARAM_NEG_TIME_2        | 2                 | 100 - 1000     | μs       | Periodo negativo (canal 2)            |
 | 8   | I         | PARAM_POS_AMP_3         | 0                 | 0 - 80       | mA       | Amplitud positiva (canal 3)           |
 | 9   | J         | PARAM_NEG_AMP_3         | 0                 | 0 - 80       | mA       | Amplitud negativa (canal 3)           |
-| 10  | K         | PARAM_POS_TIME_3        | 2                 | 2 - 1000     | μs       | Periodo positivo (canal 3)            |
-| 11  | L         | PARAM_NEG_TIME_3        | 2                 | 2 - 1000     | μs       | Periodo negativo (canal 3)            |
+| 10  | K         | PARAM_POS_TIME_3        | 2                 | 100 - 1000     | μs       | Periodo positivo (canal 3)            |
+| 11  | L         | PARAM_NEG_TIME_3        | 2                 | 100 - 1000     | μs       | Periodo negativo (canal 3)            |
 | 12  | M         | PARAM_POS_AMP_4         | 0                 | 0 - 80       | mA       | Amplitud positiva (canal 4)           |
 | 13  | N         | PARAM_NEG_AMP_4         | 0                 | 0 - 80       | mA       | Amplitud negativa (canal 4)           |
-| 14  | O         | PARAM_POS_TIME_4        | 2                 | 2 - 1000     | μs       | Periodo positivo (canal 4)            |
-| 15  | P         | PARAM_NEG_TIME_4        | 2                 | 2 - 1000     | μs       | Periodo negativo (canal 4)            |
+| 14  | O         | PARAM_POS_TIME_4        | 2                 | 100 - 1000     | μs       | Periodo positivo (canal 4)            |
+| 15  | P         | PARAM_NEG_TIME_4        | 2                 | 100 - 1000     | μs       | Periodo negativo (canal 4)            |
 | 16  | Q         | PARAM_ORDER_CHANNELS    | 228 (0x00E4)      | N/A          | N/A      | Orden de activación de los canales.   |
 | 17  | R         | PARAM_REPETITIONS       | 0                 | 0-3          | N/A      | Número de repeticiones de los canales |
 | 18  | S         | PARAM_INV_PULSE         | 0 (0x0000)        | 0-1          | N/A      | Inversión de los canales              |
@@ -43,8 +43,8 @@ Todas las variables que se presentarán a continuación son del tipo enteros pos
 | 32  | AG        | PARAM_MAX_CURRENT_2     | 0                 | 0 - 80       | mA       | Corriente máxima (canal 2)            |
 | 33  | AH        | PARAM_MAX_CURRENT_3     | 0                 | 0 - 80       | mA       | Corriente máxima (canal 3)            |
 | 34  | AI        | PARAM_MAX_CURRENT_4     | 0                 | 0 - 80       | mA       | Corriente máxima (canal 4)            |
-| 35  | AJ        | PARAM_INTRA_FREQ        | 1                 | 1 - 120      | Hz       | Frecuencia intragrupo                 |
-| 36  | AK        | PARAM_GROUP_FREQ        | 1                 | 1 - 120      | Hz       | Frecuencia de grupo                   |
+| 35  | AJ        | PARAM_INTRA_FREQ        | 1                 | 1 - 200      | Hz       | Frecuencia intragrupo                 |
+| 36  | AK        | PARAM_GROUP_FREQ        | 1                 | 1 - 200      | Hz       | Frecuencia de grupo                   |
 | 37  | AL        | PARAM_RAMPA_SUBIDA      | 0                 | 0 - 500      | Hz       | Rampa de subida                       |
 | 38  | AM        | PARAM_RAMPA_BAJADA      | 0                 | 0 - 500      | Hz       | Rampa de bajada                       |
 

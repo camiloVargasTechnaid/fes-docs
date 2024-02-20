@@ -1,5 +1,12 @@
 # Nuevos parámetros
 
+import packageJson from '/package.json'
+
+export const FirmwareVersion = () => {
+  const firmware_version = `${packageJson.firmwareVersion}`
+  return firmware_version
+}
+
 :::note[Nota]
 
 Todas las variables que se presentarán a continuación son del tipo enteros positivos de 16 bits (`uint16_t`).
@@ -53,12 +60,12 @@ Respecto a los parámetros de amplitudes, periodos y frecuencias de los canales,
 
 ## Otros parámetros
 
-| ID  | Parámetro | Nombre                 | Valor por defecto  | Rango típico | Unidades | Descripción                           |
-| --- | --------- | ---------------------- | ------------------ | ------------ | -------- | ------------------------------------- |
-| 48  | AW        | PARAM_FIRMWARE_VERSION | 0.0.1[^1] (0x0001) | N/A          | N/A      | Versión del firmware del sistema.[^1] |
-| 49  | AX        | PARAM_ERROR            | 0 (0x0000)         | N/A          | N/A      | Errores del sistema                   |
-| 50  | AY        | PARAM_STATUS           | 0 (0x0000)         | N/A          | N/A      | Estado de las funciones del sistema   |
-| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)         | N/A          | N/A      | Funciones habilitadas por el usuario  |
+| ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                           |
+| --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | ------------------------------------- |
+| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del *firmware* del sistema.[^1] |
+| 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                   |
+| 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema   |
+| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario  |
 
 De todo este conjunto de parámetros, hay algunos como `PARAM_ORDER_CHANNELS`, `PARAM_REPETITIONS`, `PARAM_INV_PULSE` y los inlcuidos en [Otros parámetros](#otros-parámetros) que son representaciones binarias del dato a ingresar; cada uno de estos se describirá a continuación:
 
@@ -165,4 +172,21 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 
 :::
 
-[^1]: La versión actual del sistema corresponde a: v0.0.1.
+### PARAM_MODO_ESTIMULACION
+
+:::info[Información]
+`PARAM_MODO_ESTIMULACION` es un valor de escritura/lectura [R/W].
+:::
+
+`PARAM_MODO_ESTIMULACION` (`AN`) es el encargado de gestionar el modo de funcionamiento de cada canal, las opciones configurables son `0` para modo simétrico y `1` para modo asimétrico.
+
+:::note[Nota]
+Actualmente sólo es posible realizar dicha configuración para todos los canales en conjunto, es decir, no es posible configurarlos de forma individual.
+:::
+
+| Estimluación | Posiciones                                                             | Valor binario        | Valor hexadecimal | Valor decimal |
+| ------------ | ---------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
+| Simétrica    | Bit0=0 (canal 4), Bit2=0 (canal 3), Bit1=0 (canal 2), Bit0=0 (canal 1) | `0b0000000000000000` | `0x0000`          | `0`           |
+| Asimétrica   | Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
+
+[^1]: La versión actual del sistema corresponde a: v<FirmwareVersion></FirmwareVersion>.

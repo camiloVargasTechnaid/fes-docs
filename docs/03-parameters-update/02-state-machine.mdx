@@ -1,14 +1,20 @@
 # Máquina de Estados
 
+import packageJson from '/package.json'
+
+export const FirmwareVersion = () => {
+  const firmware_version = `${packageJson.firmwareVersion}`
+  return firmware_version
+}
+
 Recordando los parámetros que aún faltan por definir:
 
-| ID  | Parámetro | Nombre                  | Valor por defecto  | Rango típico | Unidades | Descripción                                              |
-| --- | --------- | ----------------------- | ------------------ | ------------ | -------- | -------------------------------------------------------- |
-| 49  | AX        | PARAM_ERROR             | 0 (0x0000)         | N/A          | N/A      | Errores del sistema                                      |
-| 50  | AY        | PARAM_STATUS            | 0 (0x0000)         | N/A          | N/A      | Estado de las funciones del sistema                      |
-| 51  | AZ        | PARAM_ENABLED           | 0 (0x0000)         | N/A          | N/A      | Funciones habilitadas por el usuario                     |
-| 58  | BG        | PARAM_MODO_ESTIMULACION | 0                  | 0 - 1        | N/A      | Modo de estimulación del sistema: Simétrico o asimétrico |
-| 59  | BH        | PARAM_FIRMWARE_VERSION  | 0.0.1[^1] (0x0001) | N/A          | N/A      | Versión del firmware del sistema.[^1]                    |
+| ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                           |
+| --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | ------------------------------------- |
+| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del firmware del sistema.[^1] |
+| 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                   |
+| 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema   |
+| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario  |
 
 De esta tabla hay 3 variables importantes que manejan la máquina de estados del sistema:
 
@@ -19,6 +25,37 @@ De esta tabla hay 3 variables importantes que manejan la máquina de estados del
 :::info[Información]
 El parámetro `PARAM_ENABLED` (`AZ`) permite activar o desactivar algunas funciones del sistema, por ejemplo, deshabilitar el canal 1 mientras se mantienen activos los demás canales.
 :::
+
+### PARAM_FIRMWARE_VERSION
+
+:::info[Información]
+`PARAM_FIRMWARE_VERSION` es un valor de sólo lectura [R].
+:::
+
+:::note[Nota]
+El versionamiento del _firwmare_ sigue el estilo de Versionado Semántico 2.0.0[^2], el cual corresponde a MAJOR.MINOR.PATCH.
+
+Para este caso, cada una de estas tres opciones corresponden a un valor decimal almacenado en 4 bits, dando valores posibles desde el 0 hasta el 15 en cada uno de ellos.
+:::
+
+:::info[Información]
+La versión actual del sistema corresponde a la versión v<FirmwareVersion></FirmwareVersion>[^1].
+:::
+
+`PARAM_FIRMWARE_VERSION` (`AW`) indica la versión actual del firware del sistema.
+
+| Bits | PARAM_FIRMWARE_VERSION | Comentario                                                                      |
+| ---- | ---------------------- | ------------------------------------------------------------------------------- |
+| 0-3  | PATCH                  | Versión PATCH indica que se han resuelto _bugs_ en el código.                   |
+| 4-7  | MINOR                  | Versión MINOR agrega nuevas funcionalidades manteniendo la retrocompatibilidad  |
+| 8-11 | MAJOR                  | Versión MAJOR indica cambios que lo hacen incompatible con versiones anteriores |
+
+| Versión del _firmware_ | Posiciones                                                           | Valor binario        | Valor hexadecimal | Valor decimal |
+| ---------------------- | -------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
+| 0.1.1                  | Bit[8-11]=0000 (MAJOR), Bit[4-7]=0001 (MINOR), Bit[0-3]=0001 (PATCH) | `0b0000000000010001` | `0x0001`          | `17`          |
+
+[^1]: La versión actual del sistema corresponde a: v<FirmwareVersion></FirmwareVersion>.
+[^2]: Más información sobre Versionado Semántico 2.0.0 (en inglés): [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html).
 
 ### PARAM_ENABLED
 
@@ -123,60 +160,12 @@ Procure usar `PARAM_STATUS` y `PARAM_ENABLED` en conjunto para identificar si to
 
 Al ser este parámetro un indicador de error, una vez resuleto el problema, la variable se actualizará e indicará si el problema ha sido efectivamente resuelto.
 
-| Error                | Posiciones                                                             | Valor binario        | Valor hexadecimal | Valor decimal |
-| -------------------- | ---------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
-| Canal 1 y carga baja | Bit6=0, Bit5=1, Bit4=0, Bit3=0, Bit2=0, Bit1=0, Bit0=0                 | `0b0000000000100001` | `0x0021`          | `33`          |
-| Canal 4 | Bit6=0, Bit5=0, Bit4=0, Bit3=1, Bit2=0, Bit1=0, Bit0=0                 | `0b0000000000001000` | `0x0008`          | `8`          |
-| Sin errores | Bit6=0, Bit5=0, Bit4=0, Bit3=0, Bit2=0, Bit1=0, Bit0=0                 | `0b0000000000000000` | `0x0000`          | `0`          |
+| Error                | Posiciones                                             | Valor binario        | Valor hexadecimal | Valor decimal |
+| -------------------- | ------------------------------------------------------ | -------------------- | ----------------- | ------------- |
+| Canal 1 y carga baja | Bit6=0, Bit5=1, Bit4=0, Bit3=0, Bit2=0, Bit1=0, Bit0=0 | `0b0000000000100001` | `0x0021`          | `33`          |
+| Canal 4              | Bit6=0, Bit5=0, Bit4=0, Bit3=1, Bit2=0, Bit1=0, Bit0=0 | `0b0000000000001000` | `0x0008`          | `8`           |
+| Sin errores          | Bit6=0, Bit5=0, Bit4=0, Bit3=0, Bit2=0, Bit1=0, Bit0=0 | `0b0000000000000000` | `0x0000`          | `0`           |
 
 :::tip
 Procure mantener esta información siempre a mano, nunca se sabe cuando pueda ser bastante útil.
 :::
-
-### PARAM_MODO_ESTIMULACION
-
-:::info[Información]
-`PARAM_MODO_ESTIMULACION` es un valor de escritura/lectura [R/W].
-:::
-
-`PARAM_MODO_ESTIMULACION` (`BG`) es el encargado de gestionar el modo de funcionamiento de cada canal, las opciones configurables son `0` para modo simétrico y `1` para modo asimétrico.
-
-:::note[Nota]
-Actualmente sólo es posible realizar dicha configuración para todos los canales en conjunto, es decir, no es posible configurarlos de forma individual.
-:::
-
-| Estimluación | Posiciones                                                             | Valor binario        | Valor hexadecimal | Valor decimal |
-| ------------ | ---------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
-| Simétrica    | Bit0=0 (canal 4), Bit2=0 (canal 3), Bit1=0 (canal 2), Bit0=0 (canal 1) | `0b0000000000000000` | `0x0000`          | `0`           |
-| Asimétrica   | Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
-
-### PARAM_FIRMWARE_VERSION
-
-:::info[Información]
-`PARAM_FIRMWARE_VERSION` es un valor de sólo lectura [R].
-:::
-
-:::note[Nota]
-El versionamiento del _firwmare_ sigue el estilo de Versionado Semántico 2.0.0[^2], el cual corresponde a MAJOR.MINOR.PATCH.
-
-Para este caso, cada una de estas tres opciones corresponden a un valor decimal almacenado en 4 bits, dando valores posibles desde el 0 hasta el 15 en cada uno de ellos.
-:::
-
-:::info[Información]
-La versión actual del sistema corresponde a la versión `v0.0.1`[^1].
-:::
-
-`PARAM_FIRMWARE_VERSION` (`BH`) indica la versión actual del firware del sistema.
-
-| Bits | PARAM_FIRMWARE_VERSION | Comentario                                                                      |
-| ---- | ---------------------- | ------------------------------------------------------------------------------- |
-| 0-3  | PATCH                  | Versión PATCH indica que se han resuelto _bugs_ en el código.                   |
-| 4-7  | MINOR                  | Versión MINOR agrega nuevas funcionalidades manteniendo la retrocompatibilidad  |
-| 8-11 | MAJOR                  | Versión MAJOR indica cambios que lo hacen incompatible con versiones anteriores |
-
-| Versión del _firmware_ | Posiciones                                                           | Valor binario        | Valor hexadecimal | Valor decimal |
-| ---------------------- | -------------------------------------------------------------------- | -------------------- | ----------------- | ------------- |
-| 0.0.1                  | Bit[8-11]=0000 (MAJOR), Bit[4-7]=0000 (MINOR), Bit[0-3]=0001 (PATCH) | `0b0000000000000001` | `0x0001`          | `1`           |
-
-[^1]: La versión actual del sistema corresponde a: v0.0.1.
-[^2]: Más información sobre Versionado Semántico 2.0.0 (en inglés): [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html).

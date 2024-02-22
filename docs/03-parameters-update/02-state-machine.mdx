@@ -9,12 +9,12 @@ export const FirmwareVersion = () => {
 
 Recordando los parámetros que aún faltan por definir:
 
-| ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                           |
-| --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | ------------------------------------- |
-| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del firmware del sistema.[^1] |
-| 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                   |
-| 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema   |
-| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario  |
+| ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                          |
+| --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | ------------------------------------ |
+| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del firmware del sistema[^1] |
+| 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                  |
+| 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema  |
+| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario |
 
 De esta tabla hay 3 variables importantes que manejan la máquina de estados del sistema:
 

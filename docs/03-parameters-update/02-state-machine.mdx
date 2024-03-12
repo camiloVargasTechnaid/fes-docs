@@ -29,6 +29,7 @@ El parámetro `PARAM_ENABLED` (`AZ`) permite activar o desactivar algunas funcio
 ### PARAM_FIRMWARE_VERSION
 
 :::info[Información]
+- `PARAM_FIRMWARE_VERSION` es un valor de sólo lectura [R].
 - La versión actual del sistema corresponde a la versión v<FirmwareVersion></FirmwareVersion>[^1].
 :::
 
@@ -36,10 +37,6 @@ El parámetro `PARAM_ENABLED` (`AZ`) permite activar o desactivar algunas funcio
 El versionamiento del _firmware_ sigue el estilo de Versionado Semántico 2.0.0[^2], el cual corresponde a MAJOR.MINOR.PATCH.
 
 Para este caso, cada una de estas tres opciones corresponden a un valor decimal almacenado en 4 bits, dando valores posibles desde el 0 hasta el 15 en cada uno de ellos.
-:::
-
-:::info[Información]
-La versión actual del sistema corresponde a la versión v<FirmwareVersion></FirmwareVersion>[^1].
 :::
 
 `PARAM_FIRMWARE_VERSION` (`AW`) indica la versión actual del firware del sistema.
@@ -55,7 +52,7 @@ La versión actual del sistema corresponde a la versión v<FirmwareVersion></Fir
 | 0.1.1                  | Bit[8-11]=0000 (MAJOR), Bit[4-7]=0001 (MINOR), Bit[0-3]=0001 (PATCH) | `0b0000000000010001` | `0x0001`          | `17`          |
 
 [^1]: La versión actual del sistema corresponde a: v<FirmwareVersion></FirmwareVersion>.
-[^2]: Más información sobre Versionado Semántico 2.0.0 (en inglés): [https://semver.org/spec/v2.0.0.html](https://semver.org/spec/v2.0.0.html).
+[^2]: Más información sobre Versionado Semántico 2.0.0: [https://semver.org/lang/es/](https://semver.org/lang/es/).
 
 ### PARAM_ENABLED
 

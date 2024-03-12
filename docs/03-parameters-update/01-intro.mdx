@@ -60,12 +60,12 @@ Respecto a los parámetros de amplitudes, periodos y frecuencias de los canales,
 
 ## Otros parámetros
 
-| ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                           |
-| --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | ------------------------------------- |
-| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del *firmware* del sistema.[^1] |
-| 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                   |
-| 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema   |
-| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario  |
+| ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                             |
+| --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | --------------------------------------- |
+| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del _firmware_ del sistema.[^1] |
+| 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                     |
+| 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema     |
+| 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario    |
 
 De todo este conjunto de parámetros, hay algunos como `PARAM_ORDER_CHANNELS`, `PARAM_REPETITIONS`, `PARAM_INV_PULSE` y los inlcuidos en [Otros parámetros](#otros-parámetros) que son representaciones binarias del dato a ingresar; cada uno de estos se describirá a continuación:
 
@@ -83,7 +83,7 @@ En caso de que dos o más canales se activen en la misma posición, solamente se
 
 Un ejemplo de configuración es el valor por defecto del parámetro, el cual organiza cada canal en el mismo orden de su valor: canal 1: primero; canal 2: segundo; canal 3: tercero y, canal 4: cuarto. Otra opción es la forma invertida, siendo el canal 1 el último en activarse y el canal 4 el primero de todos. De este modo, la variable `PARAM_ORDER_CHANNELS` tendría los siguientes posibles valores:
 
-- Orden de aparición de bits: CH4=Bit[6-7]:44, CH3=Bit[4-5]:33, CH2=Bit[2-3]:22, CH1=Bit[0-1]:11; todos los valores deben ser `0` ó `1` según su posición.
+- Orden de aparición de bits: CH4=Bit[7-6]:44, CH3=Bit[5-4]:33, CH2=Bit[3-2]:22, CH1=Bit[1-0]:11; todos los valores deben ser `0` ó `1` según su posición.
 - `PARAM_ORDER_CHANNELS` = 0b0000000044332211; todos los valores deben ser `0` ó `1` según su posición.
 
 :::tip
@@ -134,7 +134,7 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 
 ### PARAM_INV_PULSE
 
-La configuración de este parámetro es similar a [PARAM_ORDER_CHANNELS](#param_order_channels), pero en este caso, el valor en cada posición indica si el canal tiene la señal invertida.
+La configuración de este parámetro es similar a [PARAM_ORDER_CHANNELS](#param_order_channels) pero, en este caso, el valor en cada posición indica si el canal tiene la señal invertida.
 
 :::note[Nota]
 
@@ -172,13 +172,13 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 
 :::
 
-### PARAM_MODO_ESTIMULACION
+### PARAM_STIMULATION_MODE
 
 :::info[Información]
-`PARAM_MODO_ESTIMULACION` es un valor de escritura/lectura [R/W].
+`PARAM_STIMULATION_MODE` es un valor de escritura/lectura [R/W].
 :::
 
-`PARAM_MODO_ESTIMULACION` (`AN`) es el encargado de gestionar el modo de funcionamiento de cada canal, las opciones configurables son `0` para modo simétrico y `1` para modo asimétrico.
+`PARAM_STIMULATION_MODE` (`AN`) es el encargado de gestionar el modo de funcionamiento de cada canal, las opciones configurables son `0` para modo simétrico y `1` para modo asimétrico.
 
 :::note[Nota]
 Actualmente sólo es posible realizar dicha configuración para todos los canales en conjunto, es decir, no es posible configurarlos de forma individual.

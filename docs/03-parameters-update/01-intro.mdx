@@ -144,7 +144,7 @@ A diferencia de `PARAM_ORDER_CHANNELS` y `PARAM_REPETITIONS` que tienen 3 opcion
 
 :::warning[Advertencia]
 
-En caso de que el par de bits correspondan a un valor diferente a `0` ó `1` (como `10` y `11`), se tomará el **valor por defecto** del parámetro para cada uno de los canales que contenga dicho error.
+En caso de que el par de bits correspondan a un valor diferente a `0` ó `1` (como `10` y `11`), se tomará como `1` para cada uno de los canales que contenga dicho error.[^2]
 
 :::
 
@@ -190,3 +190,4 @@ Actualmente sólo es posible realizar dicha configuración para todos los canale
 | Asimétrica   | Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
 
 [^1]: La versión actual del sistema corresponde a: v<FirmwareVersion></FirmwareVersion>.
+[^2]: Este valor se define por la configuración propia de los compilador para valores del tipo `bool` (Ver: [stdbool.h](https://man7.org/linux/man-pages/man0/stdbool.h.0p.html) y [basic types in C](https://en.cppreference.com/w/c/types)).

@@ -2,7 +2,7 @@
   "name": "fes-docs",
   "version": "0.0.0",
   "private": true,
-  "firmwareVersion": "0.5.2",
+  "firmwareVersion": "0.5.3",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",

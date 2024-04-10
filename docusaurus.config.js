@@ -10,8 +10,8 @@ import rehypeKatex from 'rehype-katex'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'TechNaid-004-ACVR-DI',
-  tagline: 'Technaid base project',
+  title: 'TechNaid IND2022/TIC-23606',
+  tagline: 'Technaid base project Technaid-004-ACVR-DI',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -79,7 +79,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'TechNaid Project 004-ACVR-DI',
+        title: 'TechNaid Project IND2022/TIC-23606',
         logo: {
           alt: 'My Site Logo',
           src: 'img/technaid-logo.svg',
@@ -142,7 +142,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Technaid SL. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

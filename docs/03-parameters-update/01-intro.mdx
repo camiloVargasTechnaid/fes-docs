@@ -62,7 +62,7 @@ Respecto a los parámetros de amplitudes, periodos y frecuencias de los canales,
 
 | ID  | Parámetro | Nombre                 | Valor por defecto                                | Rango típico | Unidades | Descripción                             |
 | --- | --------- | ---------------------- | ------------------------------------------------ | ------------ | -------- | --------------------------------------- |
-| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del _firmware_ del sistema.[^1] |
+| 48  | AW        | PARAM_FIRMWARE_VERSION | <FirmwareVersion></FirmwareVersion>[^1] (0x0001) | N/A          | N/A      | Versión del _firmware_ del sistema[^1] |
 | 49  | AX        | PARAM_ERROR            | 0 (0x0000)                                       | N/A          | N/A      | Errores del sistema                     |
 | 50  | AY        | PARAM_STATUS           | 0 (0x0000)                                       | N/A          | N/A      | Estado de las funciones del sistema     |
 | 51  | AZ        | PARAM_ENABLED          | 0 (0x0000)                                       | N/A          | N/A      | Funciones habilitadas por el usuario    |
@@ -190,4 +190,4 @@ Actualmente sólo es posible realizar dicha configuración para todos los canale
 | Asimétrica   | Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
 
 [^1]: La versión actual del sistema corresponde a: v<FirmwareVersion></FirmwareVersion>.
-[^2]: Este valor se define por la configuración propia de los compilador para valores del tipo `bool` (Ver: [stdbool.h](https://man7.org/linux/man-pages/man0/stdbool.h.0p.html) y [basic types in C](https://en.cppreference.com/w/c/types)).
+[^2]: Este valor se define por la configuración propia del compilador para valores del tipo `bool` (Ver: [stdbool.h](https://man7.org/linux/man-pages/man0/stdbool.h.0p.html) y [basic types in C](https://en.cppreference.com/w/c/types)).

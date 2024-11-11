@@ -36,6 +36,11 @@ const config = {
     locales: ['es', 'en'],
   },
 
+  // Enable Docusaurus Faster (not support persistent caching yet (HMR))
+  // future: {
+  //   experimental_faster: true,
+  // },
+
   presets: [
     [
       'classic',

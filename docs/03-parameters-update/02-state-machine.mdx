@@ -22,18 +22,18 @@ De esta tabla hay 3 variables importantes que manejan la máquina de estados del
 - `PARAM_STATUS`: Indica el estado de las funciones del sistema.
 - `PARAM_ERROR`: Muestra si existe algún error en el sistema.
 
-:::info[Información]
+:::info
 El parámetro `PARAM_ENABLED` (`AZ`) permite activar o desactivar algunas funciones del sistema, por ejemplo, deshabilitar el canal 1 mientras se mantienen activos los demás canales.
 :::
 
 ### PARAM_FIRMWARE_VERSION
 
-:::info[Información]
+:::info
 - `PARAM_FIRMWARE_VERSION` es un valor de sólo lectura [R].
 - La versión actual del sistema corresponde a la versión v<FirmwareVersion></FirmwareVersion>[^1].
 :::
 
-:::note[Nota]
+:::note
 El versionamiento del _firmware_ sigue el estilo de Versionado Semántico 2.0.0[^2], el cual corresponde a MAJOR.MINOR.PATCH.
 
 Para este caso, cada una de estas tres opciones corresponden a un valor decimal almacenado en 4 bits, dando valores posibles desde el 0 hasta el 15 en cada uno de ellos.
@@ -56,7 +56,7 @@ Para este caso, cada una de estas tres opciones corresponden a un valor decimal 
 
 ### PARAM_ENABLED
 
-:::info[Información]
+:::info
 `PARAM_ENABLED` es un valor de lectura y escritura [R/W].
 :::
 
@@ -71,20 +71,20 @@ Para este caso, cada una de estas tres opciones corresponden a un valor decimal 
 | 4   | FLAG_STIMULATION_CONTROL | Activar/desactivar estimulación |
 | 5   | FLAG_RAMP_CONTROL        | Activar/desactivar rampas       |
 
-:::warning[Advertencia]
+:::warning
 `FLAG_RAMP_CONTROL` aún no se encuentra implementada.
 :::
 
 En este caso, cada bandera corresponde a un único bit, el cual según su valor, indica si se habilita o desahibilita algún canal, mientras que `FLAG_STIMULATION_CONTROL` indica además si se desea activar la estimulación en los canales que estén habilitados.
 
-:::note[Nota]
+:::note
 
 - `0`: Indica que la bandera se encuentra deshabilitada.
 - `1`: Indica que la bandera se encuentra habilitada/activada y por lo tanto el canal o la estimulación.
 
 :::
 
-:::warning[Advertencia]
+:::warning
 Mientras que la bandera `FLAG_STIMULATION_CONTROL` se encuentre desactivada, ninguno de los canales habilitados estará en funcionamiento.
 :::
 
@@ -97,7 +97,7 @@ Mientras que la bandera `FLAG_STIMULATION_CONTROL` se encuentre desactivada, nin
 Si se desean activar todos los canales, el valor de `PARAM_ENABLED` debe ser `31`.
 :::
 
-:::danger[Peligro]
+:::danger
 
 Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato binario o hexadecimal, es posible que el comportamiento del sistema sea impredecible.
 
@@ -105,7 +105,7 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 
 ### PARAM_STATUS
 
-:::info[Información]
+:::info
 `PARAM_ENABLED` es un valor de sólo lectura [R].
 :::
 
@@ -127,13 +127,13 @@ Procure usar `PARAM_STATUS` y `PARAM_ENABLED` en conjunto para identificar si to
 | Canal 1 y 3       | Bit3=0 (canal 4), Bit2=1 (canal 3), Bit1=0 (canal 2), Bit0=1 (canal 1) | `0b0000000000000101` | `0x0005`          | `5`           |
 | Todos los canales | Bit3=1 (canal 4), Bit2=1 (canal 3), Bit1=1 (canal 2), Bit0=1 (canal 1) | `0b0000000000001111` | `0x000F`          | `15`          |
 
-:::danger[Peligro]
+:::danger
 `PARAM_STATUS` es el indicador principal de que todos los canales están funcionando correctamente, asegúrese de no manipularlos manualmente.
 :::
 
 ### PARAM_ERROR
 
-:::info[Información]
+:::info
 `PARAM_ENABLED` es un valor de sólo lectura [R].
 :::
 

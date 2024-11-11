@@ -12,11 +12,15 @@ La información de los menús  y parámetros del sistema están especificados en
 
 ## Menú
 
-Todos los dispositivos incluyen los siguientes comandos: `h` para ayuda, `s` para configuración y `u` para utilidades. Por favor, note que el comando debe ser seguido de un retorno de carro `CR`, nueva línea `LF` o una combinación de estos `CR+LF`.
+Todos los dispositivos incluyen los siguientes comandos: `h` para ayuda, `s` para configuración y `u` para utilidades. 
+
+:::warning
+Por favor, note que el comando debe ser seguido de un retorno de carro `CR`, nueva línea `LF` o una combinación de estos `CR+LF`.
+:::
 
 Por ejemplo, usando el **TechStim** y escribiendo sobre el puerto serial la letra `h` se obtendrá el siguiente menú:
 
-```
+```bash title="$ h"
 (h)elp
 (l)og
 (s)ettings
@@ -42,7 +46,7 @@ Toda la información respecto a estos dispositivos está disponible en:
 
 Pra lograr configruar el ID del dispositivo es necesario multiplicar el tipo de dispositivo por 256 y sumarle el ID único que está entre 0 y 255. Se recomienda que el código resultante pueda representarse como texto ASCII.
 
-```text
+```text title="ascii_table.txt"
 Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex
   0 00 NUL  16 10 DLE  32 20    48 30 0  64 40 @  80 50 P   96 60 `  112 70 p
   1 01 SOH  17 11 DC1  33 21 !  49 31 1  65 41 A  81 51 Q   97 61 a  113 71 q
@@ -86,7 +90,7 @@ Actualmente, se cuenta con más de 68 parámetros. Después de usar las 26 letra
 
 Al enviar `s`ettings for the **TechStim** se obtiene una lista como esta:
 
-```bash
+```bash title="$ s"
 0- A: 10
 1- B: 10
 2- C: 500
@@ -122,7 +126,7 @@ Por favor, tenga precaución ya que hay un límite para la contidad de caractere
 
 ## Conectando el dispositivo desde el navegador web
 
-Es posible comunicarse con los dispositiovs usando Serial sobre USB en navegadores como Chorium y Edge. Todos los dispositivos que aceptan esta característica experimental pueden ser probados aquí:
+Es posible comunicarse con los dispositiovs usando Serial sobre USB en navegadores como Chromium y Edge. Todos los dispositivos que aceptan esta característica experimental pueden ser probados aquí:
 
 <!-- TODO: -->
 <!-- [Local devices](https://hackuarium.github.io/bioreactor-ui/preferences/local-devices) -->

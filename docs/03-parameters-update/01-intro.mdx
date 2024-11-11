@@ -7,7 +7,7 @@ export const FirmwareVersion = () => {
   return firmware_version
 }
 
-:::note[Nota]
+:::note
 
 Todas las variables que se presentarán a continuación son del tipo enteros positivos de 16 bits (`uint16_t`).
 
@@ -75,7 +75,7 @@ Esta variables toma los primeros 8 bits para indicar el orden de cada uno de los
 
 Como se tienen 2 bits por canal, esto significa que cada canal puede tener 4 opciones de posición: 00: primero; 01: segundo; 10: tercero y, 11: cuarto.
 
-:::warning[Advertencia]
+:::warning
 
 En caso de que dos o más canales se activen en la misma posición, solamente se activará uno de estos canales, actualmente, se activaría el primer canal que tenga el turno en orden ascendente de los bits de `PARAM_ORDER_CHANNELS`
 
@@ -97,7 +97,7 @@ El valor a enviar al dispositivo corresponde a su valor en decimal.
 | Ascendente  | CH4=11, CH3=10, CH2=01, CH1=00   | `0b0000000011100100` | `0x00E4`          | `228`         |
 | Descendente | CH4=00, CH2:3=01, CH2=10, CH1=11 | `0b0000000000011011` | `0x0033`          | `27`          |
 
-:::danger[Peligro]
+:::danger
 
 Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato binario o hexadecimal, es posible que el comportamiento del sistema sea impredecible.
 
@@ -120,13 +120,13 @@ El rango de opciones se encuentra entre 0 repeticiones y 3 repeticiones:
 | Una          | CH4=01, CH3=01, CH2=01, CH1=01 | `0b0000000001010101` | `0x0055`          | `85`          |
 | Variada      | CH4=11, CH3=10, CH2=11, CH1=01 | `0b0000000011101101` | `0x00ED`          | `237`         |
 
-:::info[Información]
+:::info
 
 En caso de que no sea posible hacer el número de repeticiones indicado debido a que el periodo de grupo es muy pequeño, su valor será ajustado al número de repetición más cercano posible.
 
 :::
 
-:::danger[Peligro]
+:::danger
 
 Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato binario o hexadecimal, es posible que el comportamiento del sistema sea impredecible.
 
@@ -136,13 +136,13 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 
 La configuración de este parámetro es similar a [PARAM_ORDER_CHANNELS](#param_order_channels) pero, en este caso, el valor en cada posición indica si el canal tiene la señal invertida.
 
-:::note[Nota]
+:::note
 
 A diferencia de `PARAM_ORDER_CHANNELS` y `PARAM_REPETITIONS` que tienen 3 opciones para cada canal, este parámetro sólo admite `0` y `1` pero usa los mismo 2 bits para cada uno de ellos.
 
 :::
 
-:::warning[Advertencia]
+:::warning
 
 En caso de que el par de bits correspondan a un valor diferente a `0` ó `1` (como `10` y `11`), se tomará como `1` para cada uno de los canales que contenga dicho error.[^2]
 
@@ -166,7 +166,7 @@ Para conocer un poco más respecto a la configuración de los bits del parámetr
 | Inversión intercalada | CH4=01, CH3=00, CH2=01, CH1=00 | `0b0000000001000100` | `0x0044`          | `68`          |
 | Variado               | CH4=01, CH3=01, CH2=01, CH1=00 | `0b0000000001010100` | `0x0054`          | `84`          |
 
-:::danger[Peligro]
+:::danger
 
 Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato binario o hexadecimal, es posible que el comportamiento del sistema sea impredecible.
 
@@ -174,13 +174,13 @@ Asegúrese de enviar el valor en decimal. En caso de enviar el valor en formato 
 
 ### PARAM_STIMULATION_MODE
 
-:::info[Información]
+:::info
 `PARAM_STIMULATION_MODE` es un valor de escritura/lectura [R/W].
 :::
 
 `PARAM_STIMULATION_MODE` (`AN`) es el encargado de gestionar el modo de funcionamiento de cada canal, las opciones configurables son `0` para modo simétrico y `1` para modo asimétrico.
 
-:::note[Nota]
+:::note
 Actualmente sólo es posible realizar dicha configuración para todos los canales en conjunto, es decir, no es posible configurarlos de forma individual.
 :::
 
